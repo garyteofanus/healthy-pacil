@@ -41,6 +41,19 @@ func Connect() {
 		&model.User{},
 		&model.Appointment{})
 
+	// Create a default superuser
+	superuser := model.User{
+		FirstName:    "Super",
+		LastName:     "User",
+		Age:          20,
+		Email:        "superuser@admin.com",
+		Username:     config.Config("SUPERUSER_USERNAME"),
+		Password:     config.Config("SUPERUSER_PASSWORD"),
+		Role:         model.Administrator,
+		Appointments: nil,
+	}
+	DB.Create(&superuser)
+
 	if migrateError != nil {
 		panic("failed to auto migrate")
 	}

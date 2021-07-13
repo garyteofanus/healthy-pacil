@@ -26,6 +26,7 @@ func main() {
 	auth := api.Group("/auth")
 	auth.Post("/register", handler.Register)
 	auth.Post("/login", handler.Login)
+	auth.Post("/logout", handler.Logout)
 
 	// 404 Handler
 	app.Use(func(c *fiber.Ctx) error {

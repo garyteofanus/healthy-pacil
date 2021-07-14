@@ -28,6 +28,15 @@ func main() {
 	auth.Post("/login", handler.Login)
 	auth.Post("/logout", handler.Logout)
 
+	appointment := api.Group("/appointment")
+	appointment.Get("/", handler.GetAllAppointments)
+	appointment.Post("/:id/apply", handler.ApplyAppointment)
+	appointment.Post("/:id/cancel", handler.CancelAppointment)
+	appointment.Post("/create", handler.CreateAppointment)
+	appointment.Put("/:id/update", handler.UpdateAppointment)
+	appointment.Delete("/:id/delete", handler.DeleteAppointment)
+	appointment.Get("/:id/patients", handler.GetPatientsFromAppointment)
+
 	// 404 Handler
 	app.Use(func(c *fiber.Ctx) error {
 		return c.SendStatus(404)

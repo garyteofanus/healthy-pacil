@@ -68,9 +68,12 @@ func Login(c *fiber.Ctx) error {
 		})
 	}
 
-	claims := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.StandardClaims{
-		Issuer:    strconv.FormatUint(uint64(user.ID), 10),
-		ExpiresAt: time.Now().Add(time.Hour * 24).Unix(),
+	claims := jwt.NewWithClaims(jwt.SigningMethodHS256, model.CustomClaim{
+		Role: user.Role,
+		StandardClaims: jwt.StandardClaims{
+			Issuer:    strconv.FormatUint(uint64(user.ID), 10),
+			ExpiresAt: time.Now().Add(time.Hour * 24).Unix(),
+		},
 	})
 
 	token, jwtErr := claims.SignedString([]byte(config.Config("SECRET")))

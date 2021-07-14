@@ -1,0 +1,50 @@
+### Get all appointment
+
+GET http://localhost:8080/api/appointment/
+Accept: application/json
+
+### Create appointment
+
+POST http://localhost:8080/api/appointment/create
+Content-Type: application/json
+
+{
+  "doctor_name": "Doctor 3",
+  "description": "Flu appointment",
+  "capacity": 12,
+  "is_full": false
+}
+
+### Delete appointment
+
+DELETE http://localhost:8080/api/appointment/4/delete
+Accept: application/json
+
+### Update appointment
+
+PUT http://localhost:8080/api/appointment/5/update
+Content-Type: application/json
+
+{
+  "doctor_name": "Doctor 1",
+  "description": "Flu appointment",
+  "capacity": 12,
+  "is_full": true
+}
+
+### Get patient from appointment
+
+GET http://localhost:8080/api/appointment/5/patients
+Accept: application/json
+
+### Apply appointment
+
+POST http://localhost:8080/api/appointment/8/apply
+Content-Type: application/json
+
+{
+  "doctor_name": "Doctor 3",
+  "description": "Flu appointment",
+  "capacity": 12,
+  "is_full": false
+}

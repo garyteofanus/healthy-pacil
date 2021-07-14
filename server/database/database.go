@@ -52,7 +52,11 @@ func Connect() {
 		Role:         model.Administrator,
 		Appointments: nil,
 	}
-	DB.Create(&superuser)
+
+	result := DB.Where("role = ?", model.Administrator).First(&superuser)
+	if result.RowsAffected == 0 {
+		DB.Create(&superuser)
+	}
 
 	if migrateError != nil {
 		panic("failed to auto migrate")
